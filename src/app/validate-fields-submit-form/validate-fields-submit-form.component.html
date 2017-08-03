@@ -1,3 +1,75 @@
-<p>
-  validate-fields-submit-form works!
-</p>
+<form class="form-horizontal" [formGroup]="form">
+
+  <div class="form-group" [ngClass]="displayFieldCss('name')">
+    <div class="col-sm-12">
+      <label for="name" class="control-label required">Name</label>
+      <input type="text" id="name" class="form-control" formControlName="name">
+      <app-field-error-display [displayError]="isFieldValid('name')" errorMsg="Please inform your name">
+      </app-field-error-display>
+    </div>
+  </div>
+
+  <div class="form-group" [ngClass]="displayFieldCss('email')">
+    <div class="col-sm-12">
+      <label for="email" class="control-label required">Email</label>
+      <input type="text" id="email" class="form-control" formControlName="email">
+      <app-field-error-display [displayError]="isFieldValid('email')" errorMsg="Please inform your email">
+      </app-field-error-display>
+    </div>
+  </div>
+
+  <div formGroupName="address">
+
+    <div class="form-group">
+
+      <div class="col-md-6" [ngClass]="displayFieldCss('address.street')">
+        <label for="street" class="control-label required">Address</label>
+        <input type="text" id="street" class="form-control" formControlName="street">
+        <app-field-error-display [displayError]="isFieldValid('address.street')" errorMsg="Please inform your address">
+        </app-field-error-display>
+      </div>
+
+      <div class="col-md-3">
+        <label for="street2" class="control-label">Address 2</label>
+        <input type="text" id="street2" class="form-control" formControlName="street2">
+      </div>
+
+      <div class="col-md-3" [ngClass]="displayFieldCss('address.zipCode')">
+        <label for="zipCode" class="control-label required">Zip Code</label>
+        <input type="text" id="zipCode" class="form-control" formControlName="zipCode">
+        <app-field-error-display [displayError]="isFieldValid('address.zipCode')" errorMsg="Please inform your zipCode">
+        </app-field-error-display>
+      </div>
+
+    </div>
+
+    <div class="form-group">
+
+      <div class="col-md-4" [ngClass]="displayFieldCss('address.city')">
+        <label for="city" class="control-label required">City</label>
+        <input type="text" id="city" class="form-control" formControlName="city">
+        <app-field-error-display [displayError]="isFieldValid('address.city')" errorMsg="Please inform your city">
+        </app-field-error-display>
+      </div>
+
+      <div class="col-md-4" [ngClass]="displayFieldCss('address.state')">
+        <label for="state" class="control-label required">State / Province / Region</label>
+        <input type="text" id="state" class="form-control" formControlName="state">
+        <app-field-error-display [displayError]="isFieldValid('address.state')" errorMsg="Please inform your state">
+        </app-field-error-display>
+      </div>
+
+      <div class="col-md-4" [ngClass]="displayFieldCss('address.country')">
+        <label for="country" class="control-label required">Country</label>
+        <input type="text" id="country" class="form-control" formControlName="country">
+        <app-field-error-display [displayError]="isFieldValid('address.country')" errorMsg="Please inform your country">
+        </app-field-error-display>
+      </div>
+
+    </div>
+  </div>
+
+  <button class="btn btn-primary" (click)="onSubmit()">Submit</button>
+  <button class="btn" (click)="reset()">Reset</button>
+
+</form>
