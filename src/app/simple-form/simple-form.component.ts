@@ -18,7 +18,4 @@ export class SimpleFormComponent implements OnInit {
       password: [null, Validators.required],
     });
   }
-
-  onSubmit() {}
-
 }
