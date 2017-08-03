@@ -19,6 +19,7 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
+        "../node_modules/bootstrap/dist/css/bootstrap.min.css",
         "styles.css"
       ],
       "scripts": [],
@@ -58,7 +59,7 @@
     "component": {
       "spec": false,
       "inlineStyle": true,
-      "inlineTemplate": true
+      "inlineTemplate": false
     },
     "directive": {
       "spec": false
