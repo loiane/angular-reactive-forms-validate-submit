@@ -1,3 +1,24 @@
-<p>
-  submit-flag-form works!
-</p>
+<form class="form-horizontal" [formGroup]="form" (ngSubmit)="onSubmit()" >
+
+  <div class="form-group">
+    <div class="col-sm-12">
+      <label for="email" class="control-label">Email</label>
+      <input type="text" id="email" class="form-control" 
+             formControlName="email">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-sm-12">
+      <label for="password" class="control-label">Password</label>
+      <input type="password" id="password" class="form-control" 
+             formControlName="password">
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-primary" 
+          [disabled]="!form.valid">
+    Submit
+  </button>
+
+</form>
