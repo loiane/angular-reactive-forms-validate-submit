@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import {
+  FormGroup,
+  FormBuilder,
+  Validators,
+  FormControl
+} from '@angular/forms';
 
 @Component({
   selector: 'app-validate-fields-submit-form',
@@ -7,21 +12,22 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   styles: []
 })
 export class ValidateFieldsSubmitFormComponent implements OnInit {
-
   form: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder) {}
 
   ngOnInit() {
     this.form = this.formBuilder.group({
       name: [null, Validators.required],
       email: [null, [Validators.required, Validators.email]],
-      address: [null, Validators.required],
-      address2: [null],
-      zipCode: [null, Validators.required],
-      city: [null, Validators.required],
-      state: [null, Validators.required],
-      country: [null, Validators.required],
+      address: this.formBuilder.group({
+        street: [null, Validators.required],
+        street2: [null],
+        zipCode: [null, Validators.required],
+        city: [null, Validators.required],
+        state: [null, Validators.required],
+        country: [null, Validators.required]
+      })
     });
   }
 
@@ -37,22 +43,27 @@ export class ValidateFieldsSubmitFormComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.form.valid){
+    console.log(this.form);
+    if (this.form.valid) {
       console.log('form submitted');
     } else {
       this.validateAllFormFields(this.form);
     }
   }
 
-  validateAllFormFields(formGroup: FormGroup){
+  validateAllFormFields(formGroup: FormGroup) {
     Object.keys(formGroup.controls).forEach(field => {
       console.log(field);
       const control = formGroup.get(field);
-      control.markAsTouched();
-      if (control instanceof FormGroup) {
+      if (control instanceof FormControl) {
+        control.markAsTouched({ onlySelf: true });
+      } else if (control instanceof FormGroup) {
         this.validateAllFormFields(control);
       }
     });
   }
 
+  reset(){
+    this.form.reset();
+  }
 }
