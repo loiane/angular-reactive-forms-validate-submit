@@ -3,19 +3,15 @@ language: node_js
 node_js:
   - node # latest node
 
-#branches:
-#  only:
-#    - master
-
 before_script:
   - npm install -g --silent firebase-tools
   - npm install -g --silent @angular/cli
 
 script:
-  - ng build --prod --aot
+  - ng build --prod
 
 after_success:
-  - test $TRAVIS_BRANCH = "master" && firebase deploy --token $FIREBASE_TOKEN --non-interactive
+  - test $TRAVIS_BRANCH = "master" && test $TRAVIS_PULL_REQUEST = "false" && firebase deploy --token $FIREBASE_TOKEN --non-interactive
 
 notifications:
   email:
