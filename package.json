@@ -30,6 +30,6 @@
     "@angular/cli": "1.4.9",
     "@angular/compiler-cli": "^4.0.0",
     "@angular/language-service": "^4.0.0",
-    "typescript": "~2.5.2"
+    "typescript": "~2.6.1"
   }
 }
